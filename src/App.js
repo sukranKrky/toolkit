@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react'
+import { useSelector } from 'react-redux'
+import AddTodo from './todo/add'
+import Header from './todo/header'
+import TodoList from './todo/list'
+import Modal from './todo/modal'
 
 function App() {
+  const [language, setLanguage] = useState('tr')
+  const [dark, setDark] = useState(true)
+
+  const { open: isModalOpen } = useSelector((state) => state.modal)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <main className=" ">
+      <Header />
+      <AddTodo />
+      {isModalOpen && <Modal />}
+      <TodoList />
+    </main>
+  )
 }
 
-export default App;
+export default App
